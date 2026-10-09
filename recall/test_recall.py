@@ -23,8 +23,6 @@ def test_bookings(api_context):
     assert response.status == 200
     body = response.json()
     assert "bookingid" in body
-    print(body)
-    ##print(response.status, response.text())
     assert body["booking"]["firstname"] =="Jim"
     
     
@@ -44,14 +42,11 @@ def test_get_booking_id(api_context):
     
     assert create_response.status == 200
     body = create_response.json()
-    print(body)
-    
+   
     ##booking_id = create_response.json()["bookingid"]
     booking_id = body["bookingid"]
     get_response = api_context.get(f"/booking/{booking_id}")
     get_body= get_response.json()
-    print(get_body)
-    print(booking_id)
     assert get_response.status == 200
     assert get_body["firstname"] =="Jane"
     assert get_body["totalprice"] == 150
